@@ -22,14 +22,22 @@ int		main()
 	mlx_pixel_put(wire.mlx, wire.win, 20, 480, 0x009900);
 	mlx_pixel_put(wire.mlx, wire.win, 480, 20, 0x009900);
 	mlx_pixel_put(wire.mlx, wire.win, 480, 480, 0x009900);
-	while (x <= 401 && y < 400)
+	while (x <= 401 && y < 401)
 	{
 		mlx_pixel_put(wire.mlx, wire.win, x, y, 0x990000);
 		x++;
 		if (x == 400)
 		{
-			y++;
 			x = 100;
+			y++;
+			while (y % 100 != 0 && y < 401)
+			{
+				mlx_pixel_put(wire.mlx, wire.win, x, y, 0x990000);
+				mlx_pixel_put(wire.mlx, wire.win, x+100, y, 0x990000);
+				mlx_pixel_put(wire.mlx, wire.win, x+200, y, 0x990000);
+				mlx_pixel_put(wire.mlx, wire.win, x+300, y, 0x990000);
+				y++;
+			}
 		}
 	}
 	mlx_loop(wire.mlx);

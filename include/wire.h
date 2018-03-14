@@ -3,6 +3,15 @@
 # define WIN_W 500
 # define WIN_H 500
 
+typedef	struct	s_map
+{
+	char	*line;
+	int		fd;
+	int		**x;
+	int		**y;
+	int		**z;
+}				t_map;
+
 typedef struct	s_wire
 {
 	void	*mlx;

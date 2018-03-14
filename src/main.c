@@ -3,7 +3,16 @@
 #include "../include/get_next_line.h"
 #include <stdio.h>
 
-int		main(int ac, char **av)
+t_map		ft_getvalues(t_map map)
+{
+	if (map.x == NULL)
+	{
+		ft_strlen(map.line);
+	}
+	return (map);
+}
+
+int			main(int ac, char **av)
 {
 //	t_wire	wire;
 	t_map	map;
@@ -11,9 +20,11 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	map.fd = open(av[1], O_RDONLY);
-	get_next_line(map.fd, &map.line);
-	printf("[%s]", map.line);
-	printf("%lu", ((ft_strlen(map.line) / 3) + ft_strlen(map.line) % 3));
+	while (get_next_line(map.fd, &map.line) > 0)
+	{
+		printf("[%s]\n", map.line);
+	}
+	//printf("%lu", ((ft_strlen(map.line) / 3) + ft_strlen(map.line) % 3));
 //	img.bpp = 8;
 //	img.size_l = 100;
 //	img.endian = 1;

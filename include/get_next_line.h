@@ -6,7 +6,7 @@
 /*   By: ablin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 02:36:29 by ablin             #+#    #+#             */
-/*   Updated: 2018/03/10 00:33:48 by ablin            ###   ########.fr       */
+/*   Updated: 2018/03/14 23:02:45 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
-# define BUFF_SIZE 9
+# define BUFF_SIZE 60
 
 typedef	struct	s_gnl
 {

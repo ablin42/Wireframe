@@ -6,11 +6,12 @@
 /*   By: ablin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 02:36:20 by ablin             #+#    #+#             */
-/*   Updated: 2018/03/10 00:17:42 by ablin            ###   ########.fr       */
+/*   Updated: 2018/03/14 23:11:28 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "get_next_line.h"
+#include <string.h>
 
 char	*concatenate(t_gnl gnl, char *str)
 {
@@ -26,7 +27,7 @@ char	*concatenate(t_gnl gnl, char *str)
 		tmp = ft_strdup(str);
 		ft_strdel(&str);
 	}
-	str = ft_strnew(gnl.size);
+	str = ft_strnew(gnl.size * 2);
 	if (gnl.remain != NULL)
 		str = ft_strcat(str, gnl.remain);
 	if (tmp != NULL)
@@ -82,8 +83,6 @@ int		get_next_line(const int fd, char **line)
 		*line = ft_strdup(gnl.tmpline);
 	if (gnl.rd < 0)
 		return (-1);
-	if (ft_strcmp(*line, "") == 0)
-		*line = NULL;
 	if ((ft_strcmp(gnl.remain, "") == 0 && gnl.size == 0))
 		return (0);
 	if ((gnl.remain = ft_strchr(gnl.remain, '\n')) != 0)

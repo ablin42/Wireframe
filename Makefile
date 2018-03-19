@@ -8,7 +8,7 @@ LDLIBS = -lft -lmlx
 FRAMEWORKS = -framework OpenGL -framework AppKit
 NAME = fdf
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra #-fsanitize=address
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 

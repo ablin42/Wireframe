@@ -2,7 +2,7 @@
 #define WIRE_H
 # define WIN_W 500
 # define WIN_H 500
-#include <mlx.h>
+#include "../minilibx_macos/mlx.h"
 #include "get_next_line.h"
 #include <math.h>
 
@@ -15,20 +15,20 @@ typedef	struct	s_map
 	int		**z;
 }				t_map;
 
+typedef	struct	s_read
+{
+	char				*line;
+	int					nbline;
+	size_t				len;
+	struct	s_read		*next;
+}				t_read;
+
 typedef	struct	s_point
 {
 	double		x;
 	double		y;
 	double		z;
 }				t_point;
-
-typedef	struct	s_read
-{
-	int		i;
-	int		j;
-	int		k;
-	int		linesize;
-}				t_read;
 
 typedef struct	s_wire
 {
@@ -48,6 +48,6 @@ typedef struct	s_img
 }				t_img;
 
 void		ft_getvalues(t_map *map, int k, int linesize);
-void		readfile(char **arg, t_map *map);
+void		readfile(char *file, t_map *map);
 
 #endif

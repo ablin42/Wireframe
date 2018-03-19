@@ -29,11 +29,9 @@ int			main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	readfile(av[1], &map);
-	ft_putstr("test\n");
-	wire.mlx = mlx_init();
-	ft_putstr("test2\n");
-	wire.win = mlx_new_window(wire.mlx, 500, 500, "WireFrame");
-	drawmap(&wire, &map);
-	mlx_loop(wire.mlx);
+//	wire.mlx = mlx_init();
+//	wire.win = mlx_new_window(wire.mlx, 500, 500, "WireFrame");
+//	drawmap(&wire, &map);
+//	mlx_loop(wire.mlx);
 	return (0);
 }

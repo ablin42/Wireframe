@@ -33,7 +33,6 @@ void		testlist(t_read *gnl)
 	while (gnl->next != NULL)
 	{
 		ft_putstr(gnl->line);
-		ft_putnbr(gnl->len);
 		ft_putchar('\n');
 		gnl = gnl->next;
 	}
@@ -59,32 +58,6 @@ t_read	*addlist(t_read *gnl, char *line, int nbline)
 	return (gnl);
 }
 
-t_read		*parseline(t_read *gnl)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-
-	if ((str = malloc(sizeof(char *) * (gnl->len + 1))) == NULL)
-		return (0);
-	i = 0;
-	j = 0;
-	while (gnl->next != NULL)
-	{
-		while (gnl->line[i] != '\0')
-		{
-			while (ft_isdigit(gnl->line[i]) == 1)
-			{
-				
-			}
-			i++;
-		}
-		gnl = gnl->next;
-	}
-	return (gnl);
-}
-
 t_point		**getcoord(t_read *gnl, int nbline)
 {
 	t_point		**p;
@@ -99,66 +72,61 @@ t_point		**getcoord(t_read *gnl, int nbline)
 	{
 		j = 0;
 		k = 0;
+		if ((p[i] = (t_point *)malloc(sizeof(t_point) * (gnl->len + 1))) == NULL)
+				return (p);
 		while (gnl->line[j] != '\0')
 		{
-			if ((p[i] = (t_point *)malloc(sizeof(t_point) * (gnl->len + 1))) == NULL)
-				return (p);
 			if (ft_isdigit(gnl->line[j]) == 1)
 			{
-				p[i][k].z = ft_atoi(&gnl->line[i]);
+				p[i][k].z = ft_atoi(&gnl->line[j]);
 				p[i][k].x = k;
 				p[i][k].y = gnl->nbline;
-				ft_putnbr((int)p[i][k].x);
 				k++;
 				while (gnl->line[j] != '\0' && ft_isdigit(gnl->line[j]) == 1)
 					j++;
 			}
-			else
-				j++;
+			while (gnl->line[j] != '\0' && ft_isdigit(gnl->line[j]) == 0)
+					j++;
 		}
-		ft_putchar('\n');
 		i++;
 		gnl = gnl->next;
 	}
-	j = 0;
-		while (j < 19)
-		{
-			printf("x = %d y = %d z = %d] | ",(int)p[0][j].x, (int)p[0][j].y, (int)p[0][j].z);
-			j++;
-		}
-		ft_putchar('\n');
-
 	return (p);
 }
 
-void		readfile(char *file, t_map *map)
+t_point		**readfile(char *file, t_map *map)
 {
 	t_read		*gnl;
-	t_point		**p;
 	int			nbline;
-	int	i;
-	int	j;
-	j = 0;
-	i = 0;
+	//int	i;
+	//int	j;
+	//j = 0;
+	//i = 0;
 
 	gnl = NULL;
 	nbline = 0;
 	if ((map->fd = open(file, O_RDONLY)) < 0)
-		return ;
+		return (0);
 	while (get_next_line(map->fd, &map->line) > 0)
 	{
 		gnl = addlist(gnl, map->line, nbline);
 		nbline++;
 	}
+	gnl = addlist(gnl, map->line, nbline);
 	close(map->fd);
 	testlist(gnl);
-	//gnl = parseline(gnl);
-	p = getcoord(gnl, nbline);
-	j = 0;
-	/*	while (j < 19)
+	return (getcoord(gnl, nbline));
+/*	while (i <= 10)
+	{
+		j = 0;
+		while (j < 19)
 		{
-			printf("x = %d y = %d z = %d] | ",(int)p[i][j].x, (int)p[i][j].y, (int)p[i][j].z);
+		//	printf("x = %d y = %d z = %d]\n",(int)p[i][j].x, (int)p[i][j].y, (int)p[i][j].z);
+			ft_putnbr((int)p[i][j].z);
+				ft_putstr("  ");
 			j++;
 		}
-		ft_putchar('\n');*/
+		ft_putchar('\n');
+		i++;
+	}*/
 }

@@ -23,12 +23,13 @@ void		drawmap(t_wire *wire, t_map *map)
 
 int			main(int ac, char **av)
 {
-	t_wire	wire;
-	t_map	map;
+	t_wire		wire;
+	t_map		map;
+	t_point		**p;
 
 	if (ac != 2)
 		return (0);
-	readfile(av[1], &map);
+	p = readfile(av[1], &map);
 //	wire.mlx = mlx_init();
 //	wire.win = mlx_new_window(wire.mlx, 500, 500, "WireFrame");
 //	drawmap(&wire, &map);

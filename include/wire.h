@@ -48,6 +48,6 @@ typedef struct	s_img
 }				t_img;
 
 void		ft_getvalues(t_map *map, int k, int linesize);
-void		readfile(char *file, t_map *map);
+t_point		**readfile(char *file, t_map *map);
 
 #endif

@@ -64,6 +64,9 @@ t_point		**getcoord(t_read *gnl, int nbline)
 	int			i;
 	int			j;
 	int			k;
+	int			x;//
+	int			y;//
+	y = 50;//
 
 	if ((p = (t_point **)malloc(sizeof(t_point*) * (nbline + 1))) == NULL)
 		return (0);
@@ -72,6 +75,7 @@ t_point		**getcoord(t_read *gnl, int nbline)
 	{
 		j = 0;
 		k = 0;
+		x = 50;//
 		if ((p[i] = (t_point *)malloc(sizeof(t_point) * (gnl->len + 1))) == NULL)
 				return (p);
 		while (gnl->line[j] != '\0')
@@ -79,8 +83,9 @@ t_point		**getcoord(t_read *gnl, int nbline)
 			if (ft_isdigit(gnl->line[j]) == 1)
 			{
 				p[i][k].z = ft_atoi(&gnl->line[j]);
-				p[i][k].x = k;
-				p[i][k].y = gnl->nbline;
+				p[i][k].x = k + x;//
+				x += 50;//
+				p[i][k].y = gnl->nbline + y;//
 				k++;
 				while (gnl->line[j] != '\0' && ft_isdigit(gnl->line[j]) == 1)
 					j++;
@@ -89,6 +94,7 @@ t_point		**getcoord(t_read *gnl, int nbline)
 					j++;
 		}
 		i++;
+		y += 50;//
 		gnl = gnl->next;
 	}
 	return (p);

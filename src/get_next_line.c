@@ -6,12 +6,11 @@
 /*   By: ablin <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 02:36:20 by ablin             #+#    #+#             */
-/*   Updated: 2018/03/16 01:05:47 by ablin            ###   ########.fr       */
+/*   Updated: 2018/03/16 01:09:44 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 #include <string.h>
 
 char	*concatenate(t_gnl gnl, char *str)
@@ -94,22 +93,3 @@ int		get_next_line(const int fd, char **line)
 		gnl.remain = NULL;
 	return (1);
 }
-/*/
-int		main(int argc, char **argv)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-
-	(void)argc;
-	line = NULL;
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		return (0);
-	while ((ret = get_next_line(fd, &line)) >= 0)
-	{
-		printf("%d[%s]\n", ret, line);
-		if (ret == 0)
-			break;
-	}
-	return (0);
-}//*/

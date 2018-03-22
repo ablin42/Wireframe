@@ -25,10 +25,10 @@ void		drawmap(t_wire *wire, t_map *map, t_point **p)
 	while (p[i] != NULL)
 	{
 		j = 0;
-		while (j < 18 && p[i + 1] != NULL)
+		while (j < 19 && p[i + 1] != NULL)
 		{
-			drawline(wire, p[i][j], p[i][j + 1]);
-			drawline(wire, p[i][j], p[i + 1][j]);
+				drawline(wire, p[i][j], p[i][j + 1]);
+				//drawline(wire, p[i][j], p[i + 1][j]);
 			j++;
 		}
 		i++;

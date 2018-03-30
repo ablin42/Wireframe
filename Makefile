@@ -1,5 +1,5 @@
 SRC_PATH = src
-SRC_NAME = main.c read.c get_next_line.c
+SRC_NAME = main.c read.c
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 CPPFLAGS = -Iinclude

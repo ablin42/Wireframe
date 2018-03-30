@@ -1,10 +1,14 @@
 #ifndef WIRE_H
 #define WIRE_H
+#include "../minilibx_macos/mlx.h"
+#include "../libft/libft.h"
+#include <math.h>
+#include <string.h>
+
+#define OFFSET_X 50
+#define OFFSET_Y 50
 # define WIN_W 500
 # define WIN_H 500
-#include "../minilibx_macos/mlx.h"
-#include "get_next_line.h"
-#include <math.h>
 
 typedef	struct	s_map
 {
@@ -28,6 +32,7 @@ typedef	struct	s_point
 	double		x;
 	double		y;
 	double		z;
+	int			len;
 }				t_point;
 
 typedef struct	s_wire

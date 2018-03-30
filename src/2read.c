@@ -21,7 +21,7 @@ t_read	*addlist(t_read *gnl, char *line, int nbline)
 	tmp = gnl;
 	element->line = line;
 	element->len = ft_strlen(line);
-	element->nbline = OFFSET_Y + (nbline * OFFSET_Y);
+	element->nbline = nbline;
 	element->next = NULL;
 	if (gnl == NULL)
 		return (element);
@@ -31,40 +31,24 @@ t_read	*addlist(t_read *gnl, char *line, int nbline)
 	return (gnl);
 }
 
-t_point		**apply_offset(t_point **p)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (p[i] != NULL)
-	{
-		j = 0;
-		while (j < p[i]->len)
-		{
-			p[i][j].x = OFFSET_X + (OFFSET_X * j);
-			j++;
-		}
-		i++;
-	}
-	return (p);
-}
-
 t_point		**getcoord(t_read *gnl, int nbline)
 {
 	t_point		**p;
 	int			i;
 	int			j;
 	int			k;
+	int			x;//
+	int			y;//
+	y = 50;//
 
 	if ((p = (t_point **)malloc(sizeof(t_point*) * (nbline + 1))) == NULL)
 		return (0);
-	p[nbline] = NULL;
 	i = 0;
 	while (gnl->next != NULL)
 	{
 		j = 0;
 		k = 0;
+		x = 50;//
 		if ((p[i] = (t_point *)malloc(sizeof(t_point) * (gnl->len + 1))) == NULL)
 				return (p);
 		while (gnl->line[j] != '\0')
@@ -72,8 +56,9 @@ t_point		**getcoord(t_read *gnl, int nbline)
 			if (ft_isdigit(gnl->line[j]) == 1)
 			{
 				p[i][k].z = ft_atoi(&gnl->line[j]);
-				p[i][k].x = k;
-				p[i][k].y = gnl->nbline;
+				p[i][k].x = k + x;//
+				x += 50;//
+				p[i][k].y = gnl->nbline + y;//
 				k++;
 				while (gnl->line[j] != '\0' && ft_isdigit(gnl->line[j]) == 1)
 					j++;
@@ -81,17 +66,21 @@ t_point		**getcoord(t_read *gnl, int nbline)
 			while (gnl->line[j] != '\0' && ft_isdigit(gnl->line[j]) == 0)
 					j++;
 		}
-		p[i]->len = k;
 		i++;
+		y += 50;//
 		gnl = gnl->next;
 	}
-	return (apply_offset(p));
+	return (p);
 }
 
 t_point		**readfile(char *file, t_map *map)
 {
 	t_read		*gnl;
 	int			nbline;
+	//int	i;
+	//int	j;
+	//j = 0;
+	//i = 0;
 
 	gnl = NULL;
 	nbline = 0;
@@ -106,4 +95,17 @@ t_point		**readfile(char *file, t_map *map)
 	close(map->fd);
 	testlist(gnl);
 	return (getcoord(gnl, nbline));
+/*	while (i <= 10)
+	{
+		j = 0;
+		while (j < 19)
+		{
+		//	printf("x = %d y = %d z = %d]\n",(int)p[i][j].x, (int)p[i][j].y, (int)p[i][j].z);
+			ft_putnbr((int)p[i][j].z);
+				ft_putstr("  ");
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}*/
 }

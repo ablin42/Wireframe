@@ -22,13 +22,14 @@ void		drawmap(t_wire *wire, t_map *map, t_point **p)
 	int		j;
 	(void)map;
 	i = 0;
+	printf("%d\n", p[i]->len);
 	while (p[i] != NULL)
 	{
 		j = 0;
-		while (j < 19 && p[i + 1] != NULL)
+		while (j + 1 < p[i]->len && p[i + 1] != NULL)
 		{
-				drawline(wire, p[i][j], p[i][j + 1]);
-				//drawline(wire, p[i][j], p[i + 1][j]);
+			drawline(wire, p[i][j], p[i][j + 1]);
+			drawline(wire, p[i][j], p[i + 1][j]);
 			j++;
 		}
 		i++;
@@ -45,7 +46,7 @@ int			main(int ac, char **av)
 		return (0);
 	p = readfile(av[1], &map);
 	wire.mlx = mlx_init();
-	wire.win = mlx_new_window(wire.mlx, 1000, 1000, "WireFrame");
+	wire.win = mlx_new_window(wire.mlx, WIN_W, WIN_H, "WireFrame");
 	drawmap(&wire, &map, p);
 	mlx_loop(wire.mlx);
 	return (0);

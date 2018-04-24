@@ -11,6 +11,10 @@ void		testlist(t_read *gnl)
 	}
 }
 
+/*
+ * this function add each line read to a list with different informtions
+*/
+
 t_read	*addlist(t_read *gnl, char *line, int nbline)
 {
 	t_read	*element;
@@ -31,6 +35,10 @@ t_read	*addlist(t_read *gnl, char *line, int nbline)
 	return (gnl);
 }
 
+/*
+ * this function applies an offset to the X values
+*/
+
 t_point		**apply_offset(t_point **p)
 {
 	int		i;
@@ -49,6 +57,10 @@ t_point		**apply_offset(t_point **p)
 	}
 	return (p);
 }
+
+/*
+ * ths function allocates the board and place the X Y Z values in it
+*/
 
 t_point		**getcoord(t_read *gnl, int nbline)
 {
@@ -82,15 +94,21 @@ t_point		**getcoord(t_read *gnl, int nbline)
 					j++;
 		}
 		p[i]->len = k;
+		p[0]->nbline = gnl->nbline; //this is for the top and left corner but disgusting
 		i++;
 		gnl = gnl->next;
 	}
 	return (apply_offset(p));
 }
 
-t_point		**readfile(char *file, t_map *map)
+/*
+ * this function read the file and call to the other functions
+*/
+
+t_point		**readfile(char *file)
 {
 	t_read		*gnl;
+	t_map		*map;
 	int			nbline;
 
 	gnl = NULL;

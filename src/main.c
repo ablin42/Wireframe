@@ -1,6 +1,10 @@
 #include "../include/wire.h"
 #include <stdio.h>
 
+/*
+ * this is the algorithm that draws a line between two points
+*/
+
 void		drawline(t_wire *wire, t_point p1, t_point p2)
 {
 	int		iter;
@@ -16,13 +20,26 @@ void		drawline(t_wire *wire, t_point p1, t_point p2)
 	}
 }
 
-void		drawmap(t_wire *wire, t_map *map, t_point **p)
+/*
+ * this function calls to drawline for each value in the board
+ * it also has a loop to draw the top left corners
+*/
+
+void		drawmap(t_wire *wire, t_point **p)
 {
 	int		i;
 	int		j;
-	(void)map;
 	i = 0;
-	printf("%d\n", p[i]->len);
+
+	//this while place the top and left corners
+	while (i < ((p[0]->len - 1)* 50) + 1)
+	{
+		mlx_pixel_put(wire->mlx, wire->win, 50 + i , 50, 0x990000);
+		if (i + 50 < p[0]->nbline + 1)
+			mlx_pixel_put(wire->mlx, wire->win, 50 , 50 + i, 0x990000);
+		i++;
+	}
+	i = 0;
 	while (p[i] != NULL)
 	{
 		j = 0;
@@ -39,15 +56,14 @@ void		drawmap(t_wire *wire, t_map *map, t_point **p)
 int			main(int ac, char **av)
 {
 	t_wire		wire;
-	t_map		map;
 	t_point		**p;
 
 	if (ac != 2)
 		return (0);
-	p = readfile(av[1], &map);
+	p = readfile(av[1]);
 	wire.mlx = mlx_init();
 	wire.win = mlx_new_window(wire.mlx, WIN_W, WIN_H, "WireFrame");
-	drawmap(&wire, &map, p);
+	drawmap(&wire, p);
 	mlx_loop(wire.mlx);
 	return (0);
 }
